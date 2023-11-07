@@ -11,6 +11,8 @@ namespace OrderEase.Models.Data
 
 
         public OrderItem? Item { get; set; }        // Внешний ключ (связь между таблицами один к одному:    OrderItemId)
+
+        public int ProviderId { get; set; }
         public Provider? Provider { get; set; }     // Внешний ключ (связь между таблицами один к одному:    ProviderId)
     }
 }

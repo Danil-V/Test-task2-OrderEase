@@ -12,29 +12,35 @@ namespace OrderEase.Data
         public DbSet<OrderItem> OrderItems => Set<OrderItem>();
         public DbSet<Provider> Providers => Set<Provider>();
 
-
         public AppDataContext(DbContextOptions<AppDataContext> options) : base(options)
         {
             try
             {
                 bool isCreated = Database.EnsureCreated();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             { Console.WriteLine(ex); }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // добавляем роли
+            // Добавляем роли:
             Role admin = new Role { Id = 1, Name = "admin" };
             Role user = new Role { Id = 2, Name = "user" };
 
             modelBuilder.Entity<Role>().HasData(new Role[] { admin, user });
 
+            // Добавляем поставщиков:
+            Provider twigo = new Provider { Id = 1, Name = "Twigo" };
+            Provider mvideo = new Provider { Id = 2, Name = "М.Видео" };
+            Provider dns = new Provider { Id = 3, Name = "DNS" };
+            Provider eldorado = new Provider { Id = 4, Name = "Эльдорадо" };
+
+            modelBuilder.Entity<Provider>().HasData( new Provider[] {twigo, mvideo, dns, eldorado});
+
+            // Добавляем первого пользователя (администратора):
             modelBuilder.Entity<User>().HasData(
-                    new User { Id = Guid.NewGuid().GetHashCode(), Email = "admin@gmail.com", Password = "12345", RoleId = admin.Id },
-                    new User { Id = Guid.NewGuid().GetHashCode(), Email = "bob@gmail.com", Password = "55555", RoleId = user.Id }
-            );
+                    new User { Id = 1, Email = "admin@gmail.com", Password = "12345", RoleId = admin.Id });
         }
     }
 }

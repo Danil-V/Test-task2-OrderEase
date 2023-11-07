@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+
+
+@{
+    ViewBag.Title = "Account";
+    var userLogin = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value;
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8' />
@@ -6,7 +15,11 @@
 </head>
 
 <body>
-    <h2> Страница пользователя</h2>
+    <h3> Пользователь: @Html.DisplayFor(login => userLogin)</h3>
+
+    <p>
+        <a asp-action="CreateOrder" asp-controller="Order">Добавить новый заказ</a>
+    </p>
 
     <h3>Мои заказы</h3>
 

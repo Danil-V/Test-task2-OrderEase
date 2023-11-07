@@ -5,7 +5,10 @@
         public int Id { get; set; }         //- Id(int)
         public string? Name { get; set; }    //- Name(nvarchar(max)) *используется для фильтрации
 
-        public int OrderId { get; set; }
-        public Order? Oreder { get; set; }
+        public List<Order> Orders { get; set; }
+        public Provider()
+        {
+            Orders = new List<Order>();
+        }
     }
 }
