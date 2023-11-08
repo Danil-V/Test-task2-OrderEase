@@ -26,12 +26,12 @@ namespace OrderEase.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Получаем логин пользователя пользователя:
+                // Получаем логин пользователя:
                 var userEmail = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value;
                 var provider = await _db.Providers.FirstOrDefaultAsync(u => u.Name == model.ProviderName);
                 if (model != null && provider != null)
                 {
-                    // Создаем новый заках и добавляем его в бд:
+                    // Создаем новый заказ и добавляем его в бд:
                     var newOrder = new Order { Id = Guid.NewGuid().GetHashCode(), Number = Guid.NewGuid().ToString(), Date = DateTime.Now, UserEmail = userEmail, ProviderId = provider.Id };
                     var newOrderItem = new OrderItem { Id = Guid.NewGuid().GetHashCode(), Name = model.ProductName, Quantity = model.Quantity, Unit = model.Unit, OrderId = newOrder.Id };
 
@@ -45,19 +45,35 @@ namespace OrderEase.Controllers
         }
 
         [HttpGet]
-        public IActionResult ReadOrder()
+        public IActionResult ReadOrder(string id)
+        {
+            // Формируем условие для поиска в БД по id:
+            var orderId = int.Parse(id);
+
+            // Формируем нужные нам данные для передачи в представление:
+            var order = _db.Orders.FirstOrDefault(x => x.Id == orderId);
+            var orderItem = _db.OrderItems.FirstOrDefault(x => x.OrderId == order.Id);
+            var provider = _db.Providers.FirstOrDefault(x => x.Id == order.ProviderId);
+
+            // Передаем данные в представление:
+            ViewBag.Number = order.Number;
+            ViewBag.Date = order.Date;
+            ViewBag.ProductName = orderItem.Name;
+            ViewBag.Quantity = orderItem.Quantity;
+            ViewBag.Unit = orderItem.Unit;
+            ViewBag.ProviderName = provider.Name;
+
+            return View(ViewBag);
+        }
+
+        [HttpGet]
+        public IActionResult UpdateOrder(string id)
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult UpdateOrder()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult DeleateOrder()
+        public IActionResult DeleateOrder(string id)
         {
             return View();
         }

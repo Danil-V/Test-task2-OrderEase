@@ -1,3 +1,37 @@
-﻿<h2>Информация о заказе</h2>
+﻿@using System.Security.Claims;
 
-@* Добавить внизу заказа кнопки "обновить заказ" и "удалить заказ" *@
+
+@{
+    ViewBag.Title = "Account";
+    var orderId = ViewContext.RouteData.Values["id"].ToString();
+}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8' />
+        <title>OrderEase.com</title>
+    </head>
+
+    <body>
+    <h2>Информация о заказе</h2>
+    <p>Номер заказа:        @ViewBag.Number;</p>
+    <p>Дата создания:       @ViewBag.Date;</p>
+    <p>Товар:               @ViewBag.ProductName;</p>
+    <p>Количество:          @ViewBag.Quantity;</p>
+    <p>Ед. изм.:            @ViewBag.Unit;</p>
+    <p>Поставщик:           @ViewBag.ProviderName;</p> 
+
+
+    <p>
+        @Html.ActionLink("Откорректировать заказ", "UpdateOrder", "Order", new { id=orderId })
+    </p>
+    <p>
+        @Html.ActionLink("Удалить заказ", "DeleateOrder", "Order", new { id=orderId })
+    </p>
+
+
+    <p> <a asp-action="HomePage" asp-controller="Account">Вернуться на главную</a> </p>
+    </body>
+</html>
