@@ -18,7 +18,20 @@ namespace PicBox.Controllers
         [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> HomePageAsync()
         {
-            var orders = _db.Orders.OrderBy(d => d.Date);
+            DateTime date = DateTime.Now.AddMonths(-1);
+            var orders = _db.Orders.Where(d => d.Date > date);
+            orders = orders.OrderBy(d => d.Date);
+
+            return View(orders);
+        }
+        [HttpPost]
+        public async Task<IActionResult> HomePageAsync(string data)
+        {
+            int month = int.Parse(data);
+            DateTime date = DateTime.Now.AddMonths(-month);
+            var orders = _db.Orders.Where(d => d.Date > date);
+            orders = orders.OrderBy(d => d.Date);
+
             return View(orders);
         }
 

@@ -23,6 +23,27 @@
     </p>
 
     <h3>Мои заказы:</h3>
+     <form asp-action="HomePage" asp-controller="Account" asp-anti-forgery="true">
+        <div>
+            <label for="data">Укажите требуемый период для отображения заказов:</label>
+            <select id="data" name="data">
+                <option value=""></option>
+                <option value="1">1 месяц</option>
+                <option value="2">2 месяца</option>
+                <option value="3">3 месяца</option>
+                <option value="4">4 месяца</option>
+                <option value="5">5 месяцев</option>
+                <option value="6">6 месяцев</option>
+                <option value="7">7 месяцев</option>
+                <option value="8">8 месяцев</option>
+                <option value="9">9 месяцев</option>
+                <option value="10">10 месяцев</option>
+                <option value="11">11 месяцев</option>
+                <option value="12">12 месяцев</option>
+            </select>
+            <input type="submit" value="Применить фильтр" formmethod="post"/>
+        </div>
+    </form>
     <table>
         <tr>
             <th>Номер заказа</th>
