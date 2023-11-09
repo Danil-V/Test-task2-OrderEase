@@ -4,7 +4,7 @@ namespace OrderEase.Models.Web
 {
     public class OrderModel
     {
-        [Required(ErrorMessage = "Не указан нужный артикул товара")]
+        [Required(ErrorMessage = "Не выбран товар")]
         public string ProductName { get; set; }
 
         [Required(ErrorMessage = "Не указано требуемое количество")]

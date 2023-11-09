@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrderEase.Data;
 using OrderEase.Models.Data;
@@ -16,13 +17,14 @@ namespace OrderEase.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin, user")]
         public IActionResult CreateOrder()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateOrder(OrderModel model)
+        public async Task<IActionResult> CreateOrderAsync(OrderModel model)
         {
             if (ModelState.IsValid)
             {
@@ -41,19 +43,22 @@ namespace OrderEase.Controllers
                     return RedirectToAction("HomePage", "Account");
                 }
             }
-            return RedirectToAction("CreateOrder", "Order");
+            else
+                ModelState.AddModelError("", "Заполните все поля");
+            return View(model);
         }
 
         [HttpGet]
-        public IActionResult ReadOrder(string id)
+        [Authorize(Roles = "admin, user")]
+        public async Task<IActionResult> ReadOrder(string id)
         {
             // Формируем условие для поиска в БД по id:
             var orderId = int.Parse(id);
 
             // Формируем нужные нам данные для передачи в представление:
-            var order = _db.Orders.FirstOrDefault(x => x.Id == orderId);
-            var orderItem = _db.OrderItems.FirstOrDefault(x => x.OrderId == order.Id);
-            var provider = _db.Providers.FirstOrDefault(x => x.Id == order.ProviderId);
+            var order = await _db.Orders.FirstOrDefaultAsync(x => x.Id == orderId);
+            var orderItem = await _db.OrderItems.FirstOrDefaultAsync(x => x.OrderId == order.Id);
+            var provider = await _db.Providers.FirstOrDefaultAsync(x => x.Id == order.ProviderId);
 
             // Передаем данные в представление:
             ViewBag.Number = order.Number;
@@ -67,15 +72,48 @@ namespace OrderEase.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateOrder(string id)
+        [Authorize(Roles = "admin, user")]
+        public async Task<IActionResult> UpdateOrder(string id)
         {
             return View();
         }
 
-        [HttpGet]
-        public IActionResult DeleateOrder(string id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateOrderAsync(OrderModel model, string id)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var provider = await _db.Providers.FirstOrDefaultAsync(p => p.Name == model.ProviderName);
+                var order = await _db.Orders.FirstOrDefaultAsync(o => o.Number == id);
+                var orderItem = await _db.OrderItems.FirstOrDefaultAsync(i => i.OrderId == order.Id);
+
+                order.ProviderId = provider.Id;
+                order.Date = DateTime.Now;
+                orderItem.Name = model.ProductName;
+                orderItem.Quantity = model.Quantity;
+                orderItem.Unit = model.Unit;
+
+                await _db.SaveChangesAsync();
+                return RedirectToAction("HomePage", "Account");
+            }
+            else
+                ModelState.AddModelError("", "Заполните все поля");
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin, user")]
+        public async Task<IActionResult> DeleateOrder(string id)
+        {
+            var orderId = int.Parse(id);
+
+            var order = _db.Orders.FirstOrDefault(x => x.Id == orderId);
+            var orderItem = _db.OrderItems.FirstOrDefault(x => x.OrderId == order.Id);
+            _db.Orders.Remove(order);
+            _db.OrderItems.Remove(orderItem);
+            _db.SaveChanges();
+            return RedirectToAction("HomePage", "Account");
         }
     }
 }

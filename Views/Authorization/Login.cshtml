@@ -1,32 +1,41 @@
 ﻿@model OrderEase.Models.Web.LoginModel
 
-<h2>Вход на сайт</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>OrderEase.com</title>
+</head>
+<body>
+    <h2>Вход на сайт</h2>
 
-<a asp-action="Registration" asp-controller="Authorization">Регистрация</a>
-<p>
+    <a asp-action="Registration" asp-controller="Authorization">Регистрация</a>
 
-</p>
-<form asp-action="Login" asp-controller="Authorization" asp-anti-forgery="true">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <p>
+    <form asp-action="Login" asp-controller="Authorization" asp-anti-forgery="true">
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <p>
+                <div class="form-group">
+                    <label asp-for="Email">Введите Email</label>
+                    <input type="text" asp-for="Email" />
+                    <span asp-validation-for="Email" />
+                </div>
+            </p>
+            <p>
+                <div class="form-group">
+                    <label asp-for="Password">Введите пароль</label>
+                    <input asp-for="Password" />
+                    <span asp-validation-for="Password" />
+                </div>
+            </p>
             <div class="form-group">
-                <label asp-for="Email">Введите Email</label>
-                <input type="text" asp-for="Email" />
-                <span asp-validation-for="Email" />
+                <input type="submit" value="Войти" class="btn" />
             </div>
-        </p>
-        <p>
-            <div class="form-group">
-                <label asp-for="Password">Введите пароль</label>
-                <input asp-for="Password" />
-                <span asp-validation-for="Password" />
-            </div>
-        </p>
-        <div class="form-group">
-            <input type="submit" value="Войти" class="btn" />
+
+            <p> <a asp-action="StartPage" asp-controller="Home">Назад</a> </p>
         </div>
-    </div>
-</form>
+    </form>
+</body>
+</html>
 
 
