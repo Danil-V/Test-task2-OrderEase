@@ -18,7 +18,8 @@ namespace PicBox.Controllers
         [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> HomePageAsync()
         {
-            return View(_db.Orders);
+            var orders = _db.Orders.OrderBy(d => d.Date);
+            return View(orders);
         }
 
         [HttpGet]
