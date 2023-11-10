@@ -1,21 +1,13 @@
 ﻿@using System.Security.Claims;
 @model IEnumerable<OrderEase.Models.Data.Order>
 
-
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Account";
     var userLogin = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value;
 }
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8' />
-    <title>OrderEase.com</title>
-</head>
-
-<body>
+<div>
     <h3> Пользователь: @Html.DisplayFor(login => userLogin)</h3>
 
     <p>
@@ -25,7 +17,7 @@
     <h3>Мои заказы:</h3>
      <form asp-action="HomePage" asp-controller="Account" asp-anti-forgery="true">
         <div>
-            <label for="data">Укажите требуемый период для отображения заказов:</label>
+            <label for="data">Выберете период для отображения заказов:</label>
             <select id="data" name="data">
                 <option value=""></option>
                 <option value="1">1 месяц</option>
@@ -63,12 +55,9 @@
             }
         }
     </table>
-
-
     <form asp-action="logout" asp-controller="Account">
         <p>
             <input type="submit" value="Выйти из аккаунта" />
         </p>
     </form>
-</body>
-</html>
+</div>

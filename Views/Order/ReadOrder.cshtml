@@ -1,43 +1,32 @@
-﻿@using System.Security.Claims;
-
-
-@{
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Order";
     var orderId = ViewContext.RouteData.Values["id"].ToString();
     var order = ViewBag;
 }
 
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset='utf-8' />
-        <title>OrderEase.com</title>
-    </head>
-
-    <body>
+<div>
     <h2>Информация о заказе:</h2>
 
-        <p>Номер заказа:                @order.Number;</p>
-        <p>Дата создания/обновления:    @order.Date;</p>
-        <p>Товар:                       @order.ProductName;</p>
-        <p>Количество:                  @order.Quantity;</p>
-        <p>Ед. изм.:                    @order.Unit;</p>
-        <p>Поставщик:                   @order.ProviderName;</p>
+    <p>Номер заказа:                @order.Number;</p>
+    <p>Дата создания/обновления:    @order.Date;</p>
+    <p>Товар:                       @order.ProductName;</p>
+    <p>Количество:                  @order.Quantity;</p>
+    <p>Ед. изм.:                    @order.Unit;</p>
+    <p>Поставщик:                   @order.ProviderName;</p>
 
-        <p>
-            @using (Html.BeginForm("UpdateOrder", "Order", new { Id = order.Number }, FormMethod.Get))
-            {
-                <button name="action">Откорректировать заказ</button>
-            }
-        </p>
-        <p>
-            @using (Html.BeginForm("DeleateOrder", "Order", new { Id = orderId }, FormMethod.Get))
-            {
-                <button name="action">Удалить заказ</button>
-            }
-        </p>
+    <p>
+        @using (Html.BeginForm("UpdateOrder", "Order", new { Id = order.Number }, FormMethod.Get))
+        {
+            <button name="action">Откорректировать заказ</button>
+        }
+    </p>
+    <p>
+        @using (Html.BeginForm("DeleateOrder", "Order", new { Id = orderId }, FormMethod.Get))
+        {
+            <button name="action">Удалить заказ</button>
+        }
+    </p>
 
-    <p> <a asp-action="HomePage" asp-controller="Account">Вернуться на главную</a> </p>   
-    </body>
-</html>
+    <p> <a asp-action="HomePage" asp-controller="Account">Вернуться к списку заказов</a> </p>
+</div>  

@@ -2,19 +2,13 @@
 @model OrderEase.Models.Web.OrderModel
 
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Order";
     var userLogin = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value;
     var orderId = ViewContext.RouteData.Values["id"].ToString();
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8' />
-    <title>OrderEase.com</title>
-</head>
-
-<body>
+<div>
     <h3> Пользователь: @Html.DisplayFor(login => userLogin)</h3>
 
     <h4> Укажите новые данные для заказа: @orderId</h4>
@@ -70,8 +64,7 @@
                     <input type="submit" value="Обновть заказ" id=@orderId />
                 </div>
             </p>
-            <p> <a asp-action="HomePage" asp-controller="Account">Вернуться на главную</a> </p>
+            <p> <a asp-action="HomePage" asp-controller="Account">Вернуться к списку заказов</a> </p>
         </div>
     </form>
-</body>
-</html>
+</div>

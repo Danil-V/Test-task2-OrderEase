@@ -1,20 +1,14 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>OrderEase.com</title>
-    <meta charset="utf-8" />
-</head>
-<body>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page">
     <h2>Добро пожаловать на OrderEase.COM</h2>
     <h2>OrderEase.COM это удобное решение для создания и управления заказами!</h2>
-    <h3>Для продолжения работы выберите действие:</h3>
+    <h3>Для продолжения работы выберите дейтсвие:</h3>
 
-    <form action="/authorization/login">
-        <input type="submit" value="Войти" />
-    </form>
-    <p> </p>
-    <form action="/authorization/registration">
-        <input type="submit" value="Зарегистрироваться" />
-    </form>
-</body>
-</html>
+    <div>
+        <li> @Html.ActionLink("Войти", "Login", "authorization") </li>
+        <li> @Html.ActionLink("Зарегистрироваться", "Registration", "authorization") </li>
+    </div>
+</div>

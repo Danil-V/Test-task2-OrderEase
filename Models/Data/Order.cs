@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OrderEase.Models.Data
+﻿namespace OrderEase.Models.Data
 {
     public class Order
     {

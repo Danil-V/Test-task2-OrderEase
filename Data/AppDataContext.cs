@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrderEase.Models.Data;
 
-
 namespace OrderEase.Data
 {
     public class AppDataContext : DbContext

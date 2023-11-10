@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 namespace OrderEase.Controllers
 {
     public class HomeController : Controller
