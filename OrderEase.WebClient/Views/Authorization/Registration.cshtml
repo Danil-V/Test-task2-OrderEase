@@ -1,0 +1,36 @@
+﻿@model OrderEase.Core.Models.Web.RegisterModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page">
+    <h2>Регистрация</h2>
+    <form asp-action="Registration" asp-controller="Authorization" asp-anti-forgery="true">
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div>
+                <label asp-for="Email">Введите Email</label><br />
+                <input type="text" asp-for="Email" />
+                <span asp-validation-for="Email" />
+            </div>
+            <div>
+                <label asp-for="Password">Введите пароль</label><br />
+                <input asp-for="Password" />
+                <span asp-validation-for="Password" />
+            </div>
+            <div>
+                <label asp-for="ConfirmPassword">Повторите пароль</label><br />
+                <input asp-for="ConfirmPassword" />
+                <span asp-validation-for="ConfirmPassword" />
+            </div>
+            <p>
+                <div>
+                    <input type="submit" value="Регистрация" />
+                </div>
+            </p>
+        </div>
+    </form>
+</div>
+
+

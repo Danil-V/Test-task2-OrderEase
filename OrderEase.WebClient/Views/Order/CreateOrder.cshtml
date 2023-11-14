@@ -1,0 +1,67 @@
+﻿@using System.Security.Claims;
+@using OrderEase.Core.Models.Web;
+@model OrderModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Order";
+    var userLogin = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value;
+}
+
+<div>
+    <h3> Пользователь: @Html.DisplayFor(login => userLogin)</h3>
+
+    <h4> Создание нового заказа:</h4>
+    <form asp-action="CreateOrder" asp-controller="Order" asp-anti-forgery="true">
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div>
+                <label asp-for="ProductName">Выберите товар:</label><br />
+                <select id="ProductName" name="ProductName">
+                    <option value=""></option>
+                    <option value="iPhone 12">iPhone 12</option>
+                    <option value="iPhone 12 Pro">iPhone 12 Pro</option>
+                    <option value="iPhone 12 Pro Max">iPhone 12 Pro Max</option>
+                    <option value="iPhone 13">iPhone 13</option>
+                    <option value="iPhone 13 Pro">iPhone 13 Pro</option>
+                    <option value="iPhone 13 Pro Max">iPhone 13 Pro Max</option>
+                    <option value="iPhone 14">iPhone 14</option>
+                    <option value="iPhone 14 Pro">iPhone 14 Pro</option>
+                    <option value="iPhone 14 Pro Max">iPhone 14 Pro Max</option>
+                </select>
+                <span asp-validation-for="ProductName" />
+            </div>
+            <div>
+                <label asp-for="Quantity">Укажите количество:</label><br />
+                <input asp-for="Quantity" />
+                <span asp-validation-for="Quantity" />
+            </div>
+            <div>
+                <label asp-for="Unit">Выберите ед. изм.:"</label><br />
+                <select id="Unit" name="Unit">
+                    <option value=""></option>
+                    <option value="шт.">шт.</option>
+                    <option value="упак.">упаковка (10 шт.)</option>
+                </select>
+                <span asp-validation-for="Unit" />
+            </div>
+            <div>
+                <label asp-for="ProviderName">Выберите поставщика:</label><br />
+                <select id="ProviderName" name="ProviderName">
+                    <option value=""></option>
+                    <option value="Twigo">Twigo</option>
+                    <option value="М.Видео">М.Видео</option>
+                    <option value="DNS">DNS</option>
+                    <option value="Эльдорадо">Эльдорадо</option>
+                </select>
+                <span asp-validation-for="ProviderName" />
+            </div>
+            <p>
+                <div>
+                    <input type="submit" value="Создать заказ" />
+                </div>
+            </p>
+            <p> <a asp-action="HomePage" asp-controller="Account">Вернуться к списку заказов</a> </p>
+        </div>
+    </form>
+</div>
