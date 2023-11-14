@@ -7,9 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OrderEase.Core\OrderEase.Core.csproj" />
     <ProjectReference Include="..\OrderEase.DBEntity\OrderEase.DBEntity.csproj" />
     <ProjectReference Include="..\OrderEase.WebClient\OrderEase.WebClient.csproj" />
-    <ProjectReference Include="..\OrderEase\OrderEase.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
