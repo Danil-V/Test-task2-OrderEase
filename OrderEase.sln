@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Logic", "Business 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{E8B97B57-8734-4D12-97FC-945C01CB1CD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderEase.DAL", "OrderEase.DAL\OrderEase.DAL.csproj", "{45E4F180-A31F-4EA6-B729-7E60966AB55E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderEase.BLL", "OrderEase.BLL\OrderEase.BLL.csproj", "{A29E0FBE-E1C1-448A-8C10-146358FA444B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,9 +43,21 @@ Global
 		{88F852FE-14D4-48F5-9863-AB33301155EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88F852FE-14D4-48F5-9863-AB33301155EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88F852FE-14D4-48F5-9863-AB33301155EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E4F180-A31F-4EA6-B729-7E60966AB55E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E4F180-A31F-4EA6-B729-7E60966AB55E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E4F180-A31F-4EA6-B729-7E60966AB55E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E4F180-A31F-4EA6-B729-7E60966AB55E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A29E0FBE-E1C1-448A-8C10-146358FA444B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29E0FBE-E1C1-448A-8C10-146358FA444B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29E0FBE-E1C1-448A-8C10-146358FA444B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29E0FBE-E1C1-448A-8C10-146358FA444B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{45E4F180-A31F-4EA6-B729-7E60966AB55E} = {1B560BC2-18C5-4A74-9EB1-29115ABA34A8}
+		{A29E0FBE-E1C1-448A-8C10-146358FA444B} = {5710C8E8-4D55-44FA-8915-78F692FB1D4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C62E4EF-65F8-41E8-928F-D3DD5EA656FA}
