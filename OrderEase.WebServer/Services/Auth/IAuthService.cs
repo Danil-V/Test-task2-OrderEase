@@ -1,5 +1,5 @@
 ﻿using OrderEase.Core.Models.Data;
-using OrderEase.Core.Models.Web;
+using OrderEase.WebClient.Models;
 using OrderEase.DBEntity;
 
 namespace OrderEase.WebServer.Services.AuthService

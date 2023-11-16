@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrderEase.Core.Models.Data;
-using OrderEase.Core.Models.Web;
+using OrderEase.WebClient.Models;
 using OrderEase.DBEntity;
 using OrderEase.WebServer.Services.AuthService;
 

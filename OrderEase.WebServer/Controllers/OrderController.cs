@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrderEase.DBEntity;
 using OrderEase.Core.Models.Data;
-using OrderEase.Core.Models.Web;
+using OrderEase.WebClient.Models;
 using System.Security.Claims;
 
 namespace OrderEase.WebServer.Controllers

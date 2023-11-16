@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using OrderEase.Core.Models.Data;
-using OrderEase.Core.Models.Web;
+using OrderEase.WebClient.Models;
 using OrderEase.DBEntity;
 using System.Security.Claims;
 

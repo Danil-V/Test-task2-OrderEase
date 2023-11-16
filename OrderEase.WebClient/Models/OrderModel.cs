@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OrderEase.Core.Models.Web
+namespace OrderEase.WebClient.Models
 {
     public class OrderModel
     {

@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderEase.WebClient", "Orde
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderEase.Core", "OrderEase.Core\OrderEase.Core.csproj", "{7A56D320-6555-4D50-8D7A-D55B25D18C5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderEase.WebServer", "OrderEase.WebServer\OrderEase.WebServer.csproj", "{88F852FE-14D4-48F5-9863-AB33301155EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderEase.WebServer", "OrderEase.WebServer\OrderEase.WebServer.csproj", "{88F852FE-14D4-48F5-9863-AB33301155EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Access", "Data Access", "{1B560BC2-18C5-4A74-9EB1-29115ABA34A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Logic", "Business Logic", "{5710C8E8-4D55-44FA-8915-78F692FB1D4C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{E8B97B57-8734-4D12-97FC-945C01CB1CD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
