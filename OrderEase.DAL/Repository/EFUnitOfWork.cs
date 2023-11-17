@@ -1,21 +1,17 @@
 ﻿using OrderEase.DAL.Data.EF;
 using OrderEase.DAL.Data.Models.Data;
 using OrderEase.DAL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderEase.DAL.Repository
 {
-    public class EFUnitOfWork : IUnitOfWork
+    public class EFUnitOfWork : Interfaces.IUnitOfWork
     {
         private AppDataContext _db;
-        private OrderRepository orderRepository;
-        private OrderItemRepository orderItemRepository;
-        private ProviderRepository providerRepository;
+        private OrderRepository _orderRepository;
+        private OrderItemRepository _orderItemRepository;
+        private ProviderRepository _providerRepository;
+        private UserRepository _userRepository;
+        private RoleRepository _roleRepository;
 
         public EFUnitOfWork(AppDataContext db)
         {
@@ -26,18 +22,18 @@ namespace OrderEase.DAL.Repository
         {
             get
             {
-                if (orderRepository == null)
-                    orderRepository = new OrderRepository(_db);
-                return orderRepository;
+                if (_orderRepository == null)
+                    _orderRepository = new OrderRepository(_db);
+                return _orderRepository;
             }
         }
         public IRepository<OrderItem> OrderItems
         {
             get
             {
-                if (orderItemRepository == null)
-                    orderItemRepository = new OrderItemRepository(_db);
-                return orderItemRepository;
+                if (_orderItemRepository == null)
+                    _orderItemRepository = new OrderItemRepository(_db);
+                return _orderItemRepository;
             }
         }
 
@@ -45,13 +41,33 @@ namespace OrderEase.DAL.Repository
         {
             get
             {
-                if (providerRepository == null)
-                    providerRepository = new ProviderRepository(_db);
-                return providerRepository;
+                if (_providerRepository == null)
+                    _providerRepository = new ProviderRepository(_db);
+                return _providerRepository;
             }
         }
 
-        public void Save()
+        public IRepository<User> Users
+        {
+            get
+            {
+                if (_userRepository == null)
+                    _userRepository = new UserRepository(_db);
+                return _userRepository;
+            }
+        }
+
+        public IRepository<Role> Roles
+        {
+            get
+            {
+                if (_roleRepository == null)
+                    _roleRepository = new RoleRepository(_db);
+                return _roleRepository;
+            }
+        }
+
+        public async Task Save()
         {
             _db.SaveChanges();
         }

@@ -6,7 +6,9 @@ namespace OrderEase.DAL.Interfaces
     {
         IRepository<Order> Orders { get; }
         IRepository<OrderItem> OrderItems { get; }
-        IRepository<Provider> Providers { get; } 
-        void Save();
+        IRepository<Provider> Providers { get; }
+        IRepository<User> Users { get; }
+        IRepository<Role> Roles { get; }
+        Task Save();
     }
 }

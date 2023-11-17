@@ -24,24 +24,28 @@ namespace OrderEase.DAL.Repository
             return _db.Providers;
         }
 
-        public Provider Get(int id)
+        public async Task<Provider> GetAsync(string item)
         {
-            return _db.Providers.Find(id);
+            bool result = int.TryParse(item, out var id);
+            if (result == true)
+                return await _db.Providers.FirstOrDefaultAsync(x => x.Id == id);
+            else
+                return await _db.Providers.FirstOrDefaultAsync(x => x.Name == item);
         }
 
-        public void Create(Provider provider)
+        public async Task CreateAsync(Provider provider)
         {
             _db.Providers.Add(provider);
         }
 
-        public void Update(Provider provider)
+        public async Task UpdateAsync(Provider provider)
         {
-            _db.Entry(provider).State = EntityState.Modified;
+            _db.Update(provider);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            Provider provider = _db.Providers.Find(id);
+            Provider provider = await _db.Providers.FindAsync(id);
             if (provider != null)
                 _db.Providers.Remove(provider);
         }

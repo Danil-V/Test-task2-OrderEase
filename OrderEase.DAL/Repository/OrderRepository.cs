@@ -20,24 +20,29 @@ namespace OrderEase.DAL.Repository
             return _db.Orders;
         }
 
-        public Order Get(int id)
+        public async Task<Order> GetAsync(string item)
         {
-            return _db.Orders.Find(id);
+            bool result = int.TryParse(item, out var id);
+
+            if (result == true) 
+                return await _db.Orders.FirstOrDefaultAsync(x => x.Id == id);
+            else
+                return await _db.Orders.FirstOrDefaultAsync(x => x.Number == item);
         }
 
-        public void Create(Order order)
+        public async Task CreateAsync(Order order)
         {
             _db.Orders.Add(order);
         }
 
-        public void Update(Order order)
+        public async Task UpdateAsync(Order order)
         {
-            _db.Entry(order).State = EntityState.Modified;
+            _db.Update(order);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            Order order = _db.Orders.Find(id);
+            var order = await _db.Orders.FirstOrDefaultAsync(x => x.Id == id);
             if (order != null)
                 _db.Orders.Remove(order);
         }
