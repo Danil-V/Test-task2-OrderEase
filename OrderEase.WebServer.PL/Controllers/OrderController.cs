@@ -10,12 +10,10 @@ namespace OrderEase.WebServer.PL.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly AppDataContext _db;
         private OrderService _orderService;
         public OrderController(AppDataContext db)
         {
-            _db = db;
-            _orderService = new OrderService(_db);
+            _orderService = new OrderService(db);
         }
 
         [HttpGet]

@@ -35,10 +35,10 @@ namespace OrderEase.WebServer.PL.Services.AuthService
         public async Task<User?> LoginAsync(LoginDTO model)
         {
             var user = await _database.Users.GetAsync(model.Email);
-            user.Role = await _database.Roles.GetAsync(user.RoleId.ToString());
 
             if (user != null && user.Email == model.Email && user.Password == model.Password)
             {
+                user.Role = await _database.Roles.GetAsync(user.RoleId.ToString());
                 return user;
             }
             else
