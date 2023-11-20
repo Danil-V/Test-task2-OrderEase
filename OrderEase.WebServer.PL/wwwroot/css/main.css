@@ -12,6 +12,7 @@ footer {
     height: 80px;
     text-align: center;
     line-height: 80px;
+    font-size: 16px;
 }
 
 nav {
@@ -26,19 +27,63 @@ nav {
     transform: translate(-50%, -50%);
     text-align: center;
     vertical-align: middle;
+    font-size: 18px;
 }
+    .page p {
+        text-align: left;
+        vertical-align: middle;
+    }
     .page li {
         display: inline;
-        margin-right: 10px;
+        margin-right: 20px;
+        font-size: 16px;
     }
 
-.menu {
-    text-align: right;
-    padding-right: 50px;
+    .page table {
+        border-spacing: 25px 1.5rem;
+    }
+    .page caption {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+
+.homepage {
+    font-size: 16px;
 }
+
+
+
+.table {
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+    border-spacing: 15px;
+}
+    .table th {
+        text-align: center;
+        vertical-align: middle;
+    }
+    .table td{
+        text-align: center;
+        vertical-align: middle;
+    }
+    .table caption {
+        text-align: center;
+    }
+
+
+.menu {
+        text-align: right;
+        padding-right: 50px;
+        font-size: 16px;
+    }
 
     .menu ul {
         list-style: none;
+        display: inline;
     }
 
     .menu li {
@@ -49,6 +94,12 @@ nav {
         color: red;
     }
 
+.username {
+    font-size: 24px;
+    text-align: left;
+}
+
+
 table {
     vertical-align: middle;
     text-align: left;
@@ -58,7 +109,33 @@ table {
     font-weight: bold;
 }
 
-
+.readorder {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+}
+    .readorder table {
+        border-spacing: 25px 1.5rem;
+    }
+    .readorder td {
+        text-align: left;
+        vertical-align: middle;
+    }
+    .readorder caption {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .readorder li {
+        display: inline;
+        margin-right: 20px;
+        font-size: 16px;
+    }
 
 td {
     padding-right: 10px;

@@ -5,28 +5,51 @@
     var order = ViewBag;
 }
 
-<div>
-    <h2>Информация о заказе:</h2>
+<div class="readorder">
+    <table >
+        <caption><b>Информация о заказе:</b></caption>
+        <tr>
+            <td>Номер заказа:</td>
+            <td>@order.Number;</td>
+        </tr>
+        <tr>
+            <td>Дата создания/обновления:</td>
+            <td>@order.Date;</td>
+        </tr>
+        <tr>
+            <td>Товар:</td>
+            <td>@order.ProductName;</td>
+        </tr>
+        <tr>
+            <td>Количество:</td>
+            <td>@order.Quantity;</td>
+        </tr>
+        <tr>
+            <td>Ед. изм.:</td>
+            <td>@order.Unit;</td>
+        </tr>
+        <tr>
+            <td>Поставщик:</td>
+            <td>@order.ProviderName;</td>
+        </tr>
+    </table>
+
+    <li> @Html.ActionLink("Откорректировать заказ", "UpdateOrder", "Order", new { Id = order.Number }, FormMethod.Get) </li>
+    <li> @Html.ActionLink("Удалить заказ", "DeleateOrder", "Order", new { Id = orderId }, FormMethod.Get) </li>
+
+    <p style="text-align: center"> <a asp-action="HomePage" asp-controller="Account">Вернуться к списку заказов</a> </p>
+</div>
+
+
+
+@*     <h2>Информация о заказе:</h2>
 
     <p>Номер заказа:                @order.Number;</p>
     <p>Дата создания/обновления:    @order.Date;</p>
     <p>Товар:                       @order.ProductName;</p>
     <p>Количество:                  @order.Quantity;</p>
     <p>Ед. изм.:                    @order.Unit;</p>
-    <p>Поставщик:                   @order.ProviderName;</p>
+    <p>Поставщик:                   @order.ProviderName;</p> *@
 
-    <p>
-        @using (Html.BeginForm("UpdateOrder", "Order", new { Id = order.Number }, FormMethod.Get))
-        {
-            <button name="action">Откорректировать заказ</button>
-        }
-    </p>
-    <p>
-        @using (Html.BeginForm("DeleateOrder", "Order", new { Id = orderId }, FormMethod.Get))
-        {
-            <button name="action">Удалить заказ</button>
-        }
-    </p>
-
-    <p> <a asp-action="HomePage" asp-controller="Account">Вернуться к списку заказов</a> </p>
-</div>  
+ 
+   

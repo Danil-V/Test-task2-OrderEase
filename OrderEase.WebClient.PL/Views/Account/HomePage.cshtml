@@ -8,17 +8,22 @@
     var provider = string.Empty;
 }
 
-<div>
-    <h3> Пользователь: @Html.DisplayFor(login => userLogin)</h3>
+<nav>
+    <ul class="menu"> 
+        <li><a asp-action="Logout" asp-controller="Account">Выйти из аккаунта</a></li>
+    </ul>
+</nav>
 
+<h3 class="username"> Пользователь: @Html.DisplayFor(login => userLogin)</h3>
+
+<div class="homepage">
     <p>
         <a asp-action="CreateOrder" asp-controller="Order">Добавить новый заказ</a>
     </p>
-
-    <h3>Мои заказы:</h3>
+    <p></p>
      <form asp-action="HomePage" asp-controller="Account" asp-anti-forgery="true">
-        <div>
-            <p> Настройка данных фильтрации заказов (базовая настройка 1 месяц):</p>
+        <div style="text-align: center">
+            <p> Настройка фильтра отображения заказов (период по умолчанию: 1 месяц):</p>
             <label for="providerId">Выберите поставщика:</label>
             <select id="providerId" name="providerId">
                 <option value=""></option>
@@ -46,7 +51,9 @@
             <input type="submit" value="Применить фильтр" formmethod="post"/>
         </div>
     </form>
-    <table>
+    <p></p>
+    <table class="table">
+        <caption><b>Список моих заказов:</b></caption>
         <tr>
             <th>Номер заказа</th>
             <th>Поставщик</th>
@@ -56,11 +63,11 @@
         @{
             foreach (var item in Model.Reverse())
             {
-                if (userLogin == item.UserEmail )
+                if (userLogin == item.UserEmail)
                 {
                     <tr>
-                        <td> @Html.ActionLink($"{item.Number}", "ReadOrder", "Order", new { id=item.Id }) </td>
-                        <td> 
+                        <td style="text-align:left"> @Html.ActionLink($"{item.Number}", "ReadOrder", "Order", new { id = item.Id }) </td>
+                        <td class="centre">
                             @{
 
                                 if (item.ProviderId == 1)
@@ -80,9 +87,5 @@
             }
         }
     </table>
-    <form asp-action="logout" asp-controller="Account">
-        <p>
-            <input type="submit" value="Выйти из аккаунта" />
-        </p>
-    </form>
+
 </div>
