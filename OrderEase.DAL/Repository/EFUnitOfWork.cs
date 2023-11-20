@@ -67,9 +67,9 @@ namespace OrderEase.DAL.Repository
             }
         }
 
-        public async Task Save()
+        public async Task SaveAsync()
         {
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
 
         private bool disposed = false;

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrderEase.BLL.DTO;
 using OrderEase.DAL.Data.EF;
-using OrderEase.DAL.Data.Models.Data;
 using OrderEase.WebClient.PL.Models;
 using OrderEase.WebServer.PL.Services.AuthService;
 
@@ -9,12 +8,11 @@ namespace OrderEase.WebServer.PL.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private AuthService _authUser = new();
-        private readonly AppDataContext _db;
+        private AuthService _authUser;
 
         public AuthorizationController(AppDataContext db)
         {
-            _db = db;
+            _authUser = new AuthService(db);
         }
 
 
@@ -35,8 +33,8 @@ namespace OrderEase.WebServer.PL.Controllers
                     dto.Email = model.Email;
                     dto.Password = model.Password;
                     dto.ConfirmPassword = model.ConfirmPassword;
-                   
-                    await _authUser.RegistrationAsync(dto, _db);
+
+                    await _authUser.RegistrationAsync(dto);
                     return RedirectToAction("Login");
                 }
                 else
@@ -61,7 +59,7 @@ namespace OrderEase.WebServer.PL.Controllers
             {
                 dto.Email = model.Email;
                 dto.Password = model.Password;
-                var user = await _authUser.LoginAsync(dto, _db);
+                var user = await _authUser.LoginAsync(dto);
                 if (user != null)
                 {
                     await _authUser.AuthenticateAsync(user, HttpContext); // аутентификация

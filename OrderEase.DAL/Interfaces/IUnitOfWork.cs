@@ -9,6 +9,6 @@ namespace OrderEase.DAL.Interfaces
         IRepository<Provider> Providers { get; }
         IRepository<User> Users { get; }
         IRepository<Role> Roles { get; }
-        Task Save();
+        Task SaveAsync();
     }
 }

@@ -9,8 +9,8 @@ namespace OrderEase.WebServer.PL.Services.AuthService
     public interface IAuthService
     {
         Task AuthenticateAsync(User user, HttpContext context);
-        Task<User> LoginAsync(LoginDTO model, AppDataContext data);
-        Task RegistrationAsync(RegisterDTO model, AppDataContext data);
+        Task<User> LoginAsync(LoginDTO model);
+        Task RegistrationAsync(RegisterDTO model);
         Task LogoutAsync(HttpContext context);
     }
 }

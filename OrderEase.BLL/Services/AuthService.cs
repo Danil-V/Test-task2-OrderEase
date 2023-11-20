@@ -1,17 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using OrderEase.BLL.DTO;
 using OrderEase.DAL.Data.EF;
 using OrderEase.DAL.Data.Models.Data;
+using OrderEase.DAL.Repository;
 using System.Security.Claims;
 
 namespace OrderEase.WebServer.PL.Services.AuthService
 {
     public class AuthService : IAuthService
     {
-        public AuthService() { }
+        private EFUnitOfWork _database;
+        public AuthService(AppDataContext db)
+        {
+            _database = new EFUnitOfWork(db);
+        }
 
         public async Task AuthenticateAsync(User user, HttpContext context)
         {
@@ -28,31 +32,32 @@ namespace OrderEase.WebServer.PL.Services.AuthService
             await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
-        public async Task<User?> LoginAsync(LoginDTO model, AppDataContext data)
+        public async Task<User?> LoginAsync(LoginDTO model)
         {
-            User? user = await data.Users.Include(u => u.Role)
-                                           .FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
-            if (user != null)
+            var user = await _database.Users.GetAsync(model.Email);
+            user.Role = await _database.Roles.GetAsync(user.RoleId.ToString());
+
+            if (user != null && user.Email == model.Email && user.Password == model.Password)
             {
                 return user;
             }
             else
                 return null;
         }
-        public async Task RegistrationAsync(RegisterDTO model, AppDataContext data)
+        public async Task RegistrationAsync(RegisterDTO model)
         {
-            User? user = await data.Users.Include(u => u.Role)
-                                          .FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+            var user = await _database.Users.GetAsync(model.Email);
 
             if (user == null)
             {
                 // Добавляем пользователя в бд:
                 user = new User { Id = Guid.NewGuid().GetHashCode(), Email = model.Email, Password = model.Password };
-                Role userRole = await data.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+                var userRole = await _database.Roles.GetAsync("user");
+
                 if (userRole != null)
                     user.Role = userRole;
-                data.Users.Add(user);
-                await data.SaveChangesAsync();
+                await _database.Users.CreateAsync(user);
+                await _database.SaveAsync();
             }
         }
         public async Task LogoutAsync(HttpContext context)

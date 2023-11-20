@@ -63,7 +63,7 @@ namespace OrderEase.WebServer.PL.Controllers
         [HttpPost]
         public async Task<IActionResult> LogoutAsync()
         {
-            var auth = new AuthService();
+            var auth = new AuthService(_db);
             auth.LogoutAsync(HttpContext);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("StartPage", "Home");

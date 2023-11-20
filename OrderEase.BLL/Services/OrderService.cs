@@ -10,25 +10,25 @@ namespace OrderEase.BLL.Services
     public class OrderService : IOrderService
     {
 
-        private EFUnitOfWork _Database;
+        private EFUnitOfWork _database;
 
         public OrderService(AppDataContext db)
         {
-            _Database = new EFUnitOfWork(db);
+            _database = new EFUnitOfWork(db);
         }
 
         public IEnumerable<OrderDTO> GetOrders()
         {
             // применяем автомаппер для проекции одной коллекции на другую
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<Order>, List<OrderDTO>>(_Database.Orders.GetAll());
+            return mapper.Map<IEnumerable<Order>, List<OrderDTO>>(_database.Orders.GetAll());
         }
 
         public IEnumerable<OrderItemDTO> GetOrderItems()
         {
             // применяем автомаппер для проекции одной коллекции на другую
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrderItem, OrderItemDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<OrderItem>, List<OrderItemDTO>>(_Database.OrderItems.GetAll());
+            return mapper.Map<IEnumerable<OrderItem>, List<OrderItemDTO>>(_database.OrderItems.GetAll());
         }
 
         public async Task MakeOrderAsync(ViewOrderDTO viewOrderDTO)
@@ -36,8 +36,8 @@ namespace OrderEase.BLL.Services
             if (viewOrderDTO != null)
             {
                 // Получаем логин пользователя:
-                var user = await _Database.Users.GetAsync(viewOrderDTO.UserEmail);
-                var provider = await _Database.Providers.GetAsync(viewOrderDTO.ProviderName);
+                var user = await _database.Users.GetAsync(viewOrderDTO.UserEmail);
+                var provider = await _database.Providers.GetAsync(viewOrderDTO.ProviderName);
 
                 // Создаем новый заказ и добавляем его в бд:
                 var order = new Order
@@ -58,9 +58,9 @@ namespace OrderEase.BLL.Services
                     OrderId = order.Id
                 };
 
-                await _Database.Orders.CreateAsync(order);
-                await _Database.OrderItems.CreateAsync(orderItem);
-                await _Database.Save();
+                await _database.Orders.CreateAsync(order);
+                await _database.OrderItems.CreateAsync(orderItem);
+                await _database.SaveAsync();
             }
         }
 
@@ -69,9 +69,9 @@ namespace OrderEase.BLL.Services
             var viewOrder = new ViewOrderDTO();
 
             // Формируем нужные нам данные для передачи в представление:
-            var order = await _Database.Orders.GetAsync(item);
-            var orderItem = await _Database.OrderItems.GetAsync(item);
-            var provider = await _Database.Providers.GetAsync(order.ProviderId.ToString());
+            var order = await _database.Orders.GetAsync(item);
+            var orderItem = await _database.OrderItems.GetAsync(item);
+            var provider = await _database.Providers.GetAsync(order.ProviderId.ToString());
 
             viewOrder.OrderNumber = order.Number;
             viewOrder.Date = order.Date;
@@ -85,9 +85,9 @@ namespace OrderEase.BLL.Services
 
         public async Task UpdateOrderAsync(ViewOrderDTO viewOrder)
         {
-            var provider = await _Database.Providers.GetAsync(viewOrder.ProviderName);
-            var order = await _Database.Orders.GetAsync(viewOrder.OrderNumber);
-            var orderItem = await _Database.OrderItems.GetAsync(order.Id.ToString());
+            var provider = await _database.Providers.GetAsync(viewOrder.ProviderName);
+            var order = await _database.Orders.GetAsync(viewOrder.OrderNumber);
+            var orderItem = await _database.OrderItems.GetAsync(order.Id.ToString());
 
             order.ProviderId = provider.Id;
             order.Date = DateTime.Now;
@@ -95,17 +95,17 @@ namespace OrderEase.BLL.Services
             orderItem.Quantity = viewOrder.Quantity;
             orderItem.Unit = viewOrder.Unit;
 
-            await _Database.Save();
+            await _database.SaveAsync();
         }
 
         public async Task DeleteOrderAsync(string item)
         {
-            Order order = await _Database.Orders.GetAsync(item);
-            OrderItem orderItem = await _Database.OrderItems.GetAsync(item);
+            Order order = await _database.Orders.GetAsync(item);
+            OrderItem orderItem = await _database.OrderItems.GetAsync(item);
 
-            await _Database.Orders.DeleteAsync(order.Id);
-            await _Database.OrderItems.DeleteAsync(orderItem.Id);
-            await _Database.Save();
+            await _database.Orders.DeleteAsync(order.Id);
+            await _database.OrderItems.DeleteAsync(orderItem.Id);
+            await _database.SaveAsync();
         }
     }
 }

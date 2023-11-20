@@ -28,6 +28,7 @@ namespace OrderEase.DAL.Repository
                 return await _db.Users.FirstOrDefaultAsync(x => x.Email == item);
         }
 
+
         public async Task CreateAsync(User user)
         {
             _db.Users.Add(user);
