@@ -15,15 +15,13 @@
 </nav>
 
 <h3 class="username"> Пользователь: @Html.DisplayFor(login => userLogin)</h3>
+<p style="font-size: 18px"> <a asp-action="CreateOrder" asp-controller="Order">Добавить новый заказ</a> </p>
 
-<div class="homepage">
-    <p>
-        <a asp-action="CreateOrder" asp-controller="Order">Добавить новый заказ</a>
-    </p>
-    <p></p>
-     <form asp-action="HomePage" asp-controller="Account" asp-anti-forgery="true">
+
+<div class="page">
+    <form asp-action="HomePage" asp-controller="Account" asp-anti-forgery="true">
         <div style="text-align: center">
-            <p> Настройка фильтра отображения заказов (период по умолчанию: 1 месяц):</p>
+            <p style="text-align: center"> Настройка фильтра отображения заказов (период по умолчанию: 1 месяц):</p>
             <label for="providerId">Выберите поставщика:</label>
             <select id="providerId" name="providerId">
                 <option value=""></option>

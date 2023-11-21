@@ -29,6 +29,9 @@ nav {
     vertical-align: middle;
     font-size: 18px;
 }
+    .page th {
+        text-align: center;
+    }
     .page p {
         text-align: left;
         vertical-align: middle;
